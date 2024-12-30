@@ -7,7 +7,7 @@ on:
     branches:
       - "master"
     paths:
-      - ".github/workflows/docker.yml"
+      - ".github/workflows/*"
 
       - "images/**"
       - "!images/*/README.md"
@@ -16,7 +16,7 @@ on:
       - "requirements-dev.txt"
   pull_request:
     paths:
-      - ".github/workflows/docker.yml"
+      - ".github/workflows/*"
 
       - "images/**"
       - "!images/*/README.md"
