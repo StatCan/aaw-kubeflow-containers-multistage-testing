@@ -7,6 +7,11 @@ on:
         description: The directory of the image files
         required: true
         type: string
+      parent-image-is-diff:
+        description: Parent image has been changed?
+        required: false
+        type: string
+        default: "false"
     outputs:
       is-diff:
         description: Is there a difference between the master branch and the current branch
@@ -28,8 +33,11 @@ jobs:
       - name: Check for changes
         id: check-changes
         run: | # Check for changes excluding README.md
+          if ${{ inputs.parent-image-is-diff }} == 'true'
+            echo "Parent is diff"
+            echo "is-diff=true" >> $GITHUB_OUTPUT
           # Check if the subdirectory exists in the base branch
-          if ! git ls-tree -d origin/master -- "images/${{ inputs.directory }}" >/dev/null 2>&1; then
+          elif ! git ls-tree -d origin/master -- "images/${{ inputs.directory }}" >/dev/null 2>&1; then
             echo "Subdirectory does not exist in the base branch"
             echo "is-diff='true'" >> $GITHUB_OUTPUT
           else
