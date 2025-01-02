@@ -30,7 +30,14 @@ jobs:
     outputs:
       REGISTRY_NAME: "k8scc01covidacr"
       DEV_REGISTRY_NAME: "k8scc01covidacrdev"
+      branch-name: ${{ steps.getBranch.outputs.branch_name }}
     steps:
+      - name: Get branch name
+        id: getBranch
+        run |
+          chmod +x ./make_helpers/get_branch_name.sh
+          BRANCH_NAME=$(./make_helpers/get_branch_name.sh)
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
       - name: Set up environment
         run: echo "Environment has been set up."
 
@@ -42,6 +49,7 @@ jobs:
       directory: "base"
       base-image: "quay.io/jupyter/datascience-notebook:2024-06-17"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -56,6 +64,7 @@ jobs:
       parent-image: "base-fork"
       parent-image-is-diff: "${{ needs.base.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -71,6 +80,7 @@ jobs:
       parent-image-is-diff: "${{ needs.platform-jupyterlab.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
       is-final: "true"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -85,6 +95,7 @@ jobs:
       parent-image: "platform-jupyterlab-fork"
       parent-image-is-diff: "${{ needs.platform-jupyterlab.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -100,6 +111,7 @@ jobs:
       parent-image-is-diff: "${{ needs.mid-tensorflow.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
       is-final: "true"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -114,6 +126,7 @@ jobs:
       parent-image: "base-fork"
       parent-image-is-diff: "${{ needs.base.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -128,6 +141,7 @@ jobs:
       parent-image: "mid-rstudio-fork"
       parent-image-is-diff: "${{ needs.mid-rstudio.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -143,6 +157,7 @@ jobs:
       parent-image-is-diff: "${{ needs.platform-rstudio.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
       is-final: "true"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -157,6 +172,7 @@ jobs:
       parent-image: "mid-rstudio-fork"
       parent-image-is-diff: "${{ needs.mid-rstudio.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -172,6 +188,7 @@ jobs:
       parent-image-is-diff: "${{ needs.mid-sas.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
       is-final: "true"
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
@@ -189,6 +206,7 @@ jobs:
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
       is-final: "true"
       buildkit: 0
+      branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
