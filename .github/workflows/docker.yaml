@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Get branch name
         id: getBranch
-        run |
+        run: |
           chmod +x ./make_helpers/get_branch_name.sh
           BRANCH_NAME=$(./make_helpers/get_branch_name.sh)
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
