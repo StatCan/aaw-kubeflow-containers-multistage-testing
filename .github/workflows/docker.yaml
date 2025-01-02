@@ -30,7 +30,7 @@ jobs:
     outputs:
       REGISTRY_NAME: "k8scc01covidacr"
       DEV_REGISTRY_NAME: "k8scc01covidacrdev"
-      branch-name: ${{ steps.getBranch.outputs.branch_name }}
+      branch-name: ${{ steps.getBranch.outputs.branch-name }}
     steps:
       - uses: actions/checkout@v4
 
