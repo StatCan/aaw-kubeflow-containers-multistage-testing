@@ -59,7 +59,7 @@ jobs:
 
       - name: Pull existing image
         id: pull-existing
-        run: make pull/${{ inputs.image }} REPO=${{ inputs.registry-name }}.azurecr.io TAG=branch-name: ${{ inputs.branch-name }}
+        run: make pull/${{ inputs.image }} REPO=${{ inputs.registry-name }}.azurecr.io TAG=${{ inputs.branch-name }}
 
       - name: Set Up Python for Test Suite
         uses: actions/setup-python@v4
