@@ -39,6 +39,7 @@ jobs:
         run: |
           chmod +x ./make_helpers/get_branch_name.sh
           BRANCH_NAME=$(./make_helpers/get_branch_name.sh)
+          echo "branch-name=$BRANCH_NAME"
           echo "branch-name=$BRANCH_NAME" >> $GITHUB_OUTPUT
       - name: Set up environment
         run: echo "Environment has been set up."
