@@ -32,6 +32,8 @@ jobs:
       DEV_REGISTRY_NAME: "k8scc01covidacrdev"
       branch-name: ${{ steps.getBranch.outputs.branch_name }}
     steps:
+      - uses: actions/checkout@v4
+
       - name: Get branch name
         id: getBranch
         run: |
