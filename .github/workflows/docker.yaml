@@ -199,7 +199,7 @@ jobs:
   # Test the Images
 
   jupyterlab-cpu-test:
-    needs: [jupyterlab-cpu]
+    needs: [vars, jupyterlab-cpu]
     uses: ./.github/workflows/docker-pull-test.yaml
     with:
       image: "jupyterlab-cpu-fork"
