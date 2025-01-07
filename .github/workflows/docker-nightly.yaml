@@ -25,7 +25,7 @@ jobs:
         run: echo "Environment has been set up."
 
   jupyterlab-cpu-test:
-    needs: [jupyterlab-cpu]
+    needs: [vars]
     uses: ./.github/workflows/docker-pull-test.yaml
     with:
       image: "jupyterlab-cpu-fork"
@@ -37,7 +37,7 @@ jobs:
       CVE_ALLOWLIST: ${{ secrets.CVE_ALLOWLIST}}
 
   jupyterlab-tensorflow-test:
-    needs: [vars, mid-tensorflow]
+    needs: [vars]
     uses: ./.github/workflows/docker-pull-test.yaml
     with:
       image: "jupyterlab-tensorflow-fork"
@@ -49,7 +49,7 @@ jobs:
       CVE_ALLOWLIST: ${{ secrets.CVE_ALLOWLIST}}
 
   rstudio-test:
-    needs: [vars, platform-rstudio]
+    needs: [vars]
     uses: ./.github/workflows/docker-pull-test.yaml
     with:
       image: "rstudio-fork"
@@ -61,7 +61,7 @@ jobs:
       CVE_ALLOWLIST: ${{ secrets.CVE_ALLOWLIST}}
 
   sas-test:
-    needs: [vars, mid-sas]
+    needs: [vars]
     uses: ./.github/workflows/docker-pull-test.yaml
     with:
       image: "sas-fork"
