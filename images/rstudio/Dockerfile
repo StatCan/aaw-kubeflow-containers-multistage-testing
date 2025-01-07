@@ -28,12 +28,6 @@ RUN mamba install --quiet --yes \
       'r-rodbc' \
       'r-tidyverse' \
       'r-arrow' \
-      && \
-      clean-layer.sh && \
-      fix-permissions $CONDA_DIR && \
-      fix-permissions /home/$NB_USER
-
-RUN mamba install --quiet --yes \
       'r-aws.s3' \
       'r-catools' \
       && \
@@ -44,13 +38,6 @@ RUN mamba install --quiet --yes \
 # Install some default R packages
 RUN mamba install --quiet --yes \
       'r-odbc' \
-    && \
-    clean-layer.sh && \
-    fix-permissions $CONDA_DIR && \
-    fix-permissions /home/$NB_USER
-
-# Install some default R packages
-RUN mamba install --quiet --yes \
       'r-hdf5r' \
     && \
     clean-layer.sh && \
