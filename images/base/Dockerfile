@@ -1,3 +1,6 @@
+# Base image is set to quay.io/jupyter/datascience-notebook:2025-01-06
+# See docker.yaml for more details
+
 USER root
 
 ENV PATH="/home/jovyan/.local/bin/:${PATH}"
