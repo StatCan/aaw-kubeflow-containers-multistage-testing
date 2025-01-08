@@ -36,7 +36,11 @@ RUN mamba install --quiet \
 # Add helpers for shell initialization
 COPY shell_helpers.sh /tmp/shell_helpers.sh
 
-RUN apt-get update && apt-cache search tmux && apt-cache search zip && apt-cache search tree 
+RUN ping -c 3 archive.ubuntu.com && apt-get update
+
+RUN apt-get update || (cat /var/log/apt/* && exit 1) && \
+    apt-get install -y --no-install-recommends \
+        byobu || (cat /var/log/apt/* && exit 1)
 
 # Dependencies
 RUN apt-get update && \
