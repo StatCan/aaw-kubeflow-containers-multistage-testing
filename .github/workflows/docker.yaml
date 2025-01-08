@@ -119,7 +119,6 @@ jobs:
       parent-image: "base-fork"
       parent-image-is-diff: "${{ needs.base.outputs.is-diff }}"
       registry-name: "${{ needs.vars.outputs.REGISTRY_NAME }}"
-      buildkit: 0
       branch-name: "${{ needs.vars.outputs.branch-name }}"
     secrets:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
