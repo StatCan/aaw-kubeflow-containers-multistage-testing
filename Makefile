@@ -41,8 +41,8 @@ get-docker-stacks-upstream-tag:
 	@echo $(DOCKER-STACKS-UPSTREAM-TAG)
 
 generate-CUDA:
-	bash scripts/get-nvidia-stuff.sh $(tensorflow-CUDA) > 1_CUDA-$(tensorflow-CUDA).Dockerfile
 	bash scripts/get-nvidia-stuff.sh    $(pytorch-CUDA) > 1_CUDA-$(pytorch-CUDA).Dockerfile
+	bash $(MAKE_HELPERS)/get-nvidia-stuff.sh $(tensorflow-CUDA) > 1_CUDA-$(tensorflow-CUDA).Dockerfile
 
 ###################################
 ######    Docker helpers     ######
