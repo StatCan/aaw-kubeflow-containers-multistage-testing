@@ -10,6 +10,7 @@ COPY clean-layer.sh /usr/bin/clean-layer.sh
 RUN apt-get update --yes \
     && apt-get install --yes language-pack-fr \
     && apt-get upgrade --yes libwebp7 \
+    && apt-get clean && \
     && rm -rf /var/lib/apt/lists/* \
     && chmod +x /usr/bin/clean-layer.sh
 
@@ -34,6 +35,8 @@ RUN mamba install --quiet \
 
 # Add helpers for shell initialization
 COPY shell_helpers.sh /tmp/shell_helpers.sh
+
+RUN apt-get update && apt-cache search tmux && apt-cache search zip && apt-cache search tree 
 
 # Dependencies
 RUN apt-get update && \
