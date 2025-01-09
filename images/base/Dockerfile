@@ -36,7 +36,7 @@ RUN mamba install --quiet \
 # Add helpers for shell initialization
 COPY shell_helpers.sh /tmp/shell_helpers.sh
 
-RUN ping -c 3 archive.ubuntu.com && apt-get update
+RUN curl -Is http://archive.ubuntu.com | head -n 1 && apt-get update
 
 RUN apt-get update || (cat /var/log/apt/* && exit 1) && \
     apt-get install -y --no-install-recommends \
