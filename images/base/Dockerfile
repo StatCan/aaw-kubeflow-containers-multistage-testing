@@ -36,7 +36,9 @@ RUN mamba install --quiet \
 # Add helpers for shell initialization
 COPY shell_helpers.sh /tmp/shell_helpers.sh
 
-RUN curl -Is http://archive.ubuntu.com | head -n 1 && apt-get update
+RUN apt-get update || (cat /var/log/apt/* && exit 1) && \
+    apt-get install -y --no-install-recommends byobu || (cat /var/log/apt/* /var/log/dpkg.log && exit 1)
+
 
 RUN apt-get update || (cat /var/log/apt/* && exit 1) && \
     apt-get install -y --no-install-recommends \
