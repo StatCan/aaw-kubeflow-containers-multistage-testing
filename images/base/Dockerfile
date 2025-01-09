@@ -39,11 +39,6 @@ COPY shell_helpers.sh /tmp/shell_helpers.sh
 RUN apt-get update || (cat /var/log/apt/* && exit 1) && \
     apt-get install -y --no-install-recommends byobu || (cat /var/log/apt/* /var/log/dpkg.log && exit 1)
 
-
-RUN apt-get update || (cat /var/log/apt/* && exit 1) && \
-    apt-get install -y --no-install-recommends \
-        byobu || (cat /var/log/apt/* && exit 1)
-
 # Dependencies
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
