@@ -199,8 +199,8 @@ RUN pip install \
     'ipywidgets' \
     'markupsafe' \
     'ipympl' \
-    'pexpect==4.9.0' \
-    'jupyter-server-proxy==4.2.0' \
+    'pexpect' \
+    'jupyter-server-proxy' \
     'jupyterlab-language-pack-fr-fr' \
     'jupyterlab_execute_time' \
     'nb_conda_kernels' \
