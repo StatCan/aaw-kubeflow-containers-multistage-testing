@@ -30,6 +30,10 @@ on:
         description: buildkit version, legacy is 0 and deprecated 
         required: true
         type: number
+      branch-name:
+        description: The name of the current branch 
+        required: true
+        type: string
     secrets:
       REGISTRY_USERNAME:
         description: The username for the container registry
@@ -97,8 +101,13 @@ jobs:
       - name: Echo disk usage after build completion
         run: ./.github/scripts/echo_usage.sh
 
-      - name: Add standard tag names (short sha, sha, and branch) and any other post-build activity
+      - name: Add standard tags (short sha, sha, and branch) and any other post-build activity
+        if: ${{ "inputs.branch-name" != "master" }}
         run: make post-build/${{ inputs.image }} REPO=${{ inputs.registry-name }}
+
+      - name: Add master and standard tags (v1, latest; short sha, sha, and branch) and any other post-build activity
+        if: ${{ "inputs.branch-name" == "master" }}
+        run: make post-build/${{ inputs.image }} REPO=${{ inputs.registry-name }} IMAGE_VERSION=v1 IS_LATEST=true
 
       - name: Push image to registry (default pushes all tags)
         run: make push/${{ inputs.image }} REPO=${{ inputs.registry-name }}
