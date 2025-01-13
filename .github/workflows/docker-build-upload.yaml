@@ -102,11 +102,11 @@ jobs:
         run: ./.github/scripts/echo_usage.sh
 
       - name: Add standard tags (short sha, sha, and branch) and any other post-build activity
-        if: ${{ "inputs.branch-name" != "master" }}
+        if: ${{ inputs.branch-name != "master" }}
         run: make post-build/${{ inputs.image }} REPO=${{ inputs.registry-name }}
 
       - name: Add master and standard tags (v1, latest; short sha, sha, and branch) and any other post-build activity
-        if: ${{ "inputs.branch-name" == "master" }}
+        if: ${{ inputs.branch-name == "master" }}
         run: make post-build/${{ inputs.image }} REPO=${{ inputs.registry-name }} IMAGE_VERSION=v1 IS_LATEST=true
 
       - name: Push image to registry (default pushes all tags)
