@@ -81,7 +81,7 @@ They either push a local image to the acr, or pull and exisitng one from acr to 
 The `REPO` and `TAG` arguments are available to override their default values.
 
 **Note:** To use `make pull` or `make push`,
-you must first log in to ACR (`az acr login -n k8scc01covidacr`)
+you must first login to ACR (`az acr login -n k8scc01covidacr`)
 
 **Note:** `make push` by default does `docker push --all-tags` in order to push the SHA, SHORT_SHA, etc., tags.
 
