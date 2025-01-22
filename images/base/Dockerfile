@@ -32,6 +32,7 @@ RUN mamba install --quiet \
 # Add helpers for shell initialization
 COPY shell_helpers.sh /tmp/shell_helpers.sh
 
+
 # Dependencies
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
